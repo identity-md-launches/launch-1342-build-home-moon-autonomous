@@ -1,0 +1,17 @@
+.lattice {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  z-index: var(--z-lattice);
+  pointer-events: none;
+  /* Fade the outer edge into the page so the spiral has no hard boundary. */
+  mask-image: radial-gradient(circle at 50% 30vw, #000 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 30vw, #000 40%, transparent 80%);
+}
+@media (min-width: 52rem) {
+  .lattice {
+    mask-image: radial-gradient(ellipse at 68% 50%, #000 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at 68% 50%, #000 40%, transparent 80%);
+  }
+}

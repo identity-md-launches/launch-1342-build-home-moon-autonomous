@@ -1,0 +1,51 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  min-inline-size: 0;
+  background: var(--color-bg-surface);
+  border: var(--line) solid var(--color-border);
+  border-radius: var(--radius-md);
+  position: relative;
+}
+.tile::before {
+  /* coordinate tick in the corner */
+  content: '';
+  position: absolute;
+  inset-block-start: 6px;
+  inset-inline-end: 6px;
+  inline-size: 8px;
+  block-size: 8px;
+  border-block-start: var(--line) solid var(--color-border-strong);
+  border-inline-end: var(--line) solid var(--color-border-strong);
+}
+.tile__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+.tile__value {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  color: var(--color-text);
+  min-block-size: 1.1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tile--alert .tile__value {
+  color: var(--color-alert-text);
+}
+.tile__spark {
+  color: var(--color-accent-deep);
+  block-size: 28px;
+}
+.tile__spark .sparkline {
+  inline-size: 100%;
+  block-size: 28px;
+}
+.tile__detail {
+  min-block-size: 1.2em;
+}

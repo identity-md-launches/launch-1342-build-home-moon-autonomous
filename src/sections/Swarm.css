@@ -1,0 +1,23 @@
+.swarm__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: var(--space-3);
+}
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-block-start: var(--space-5);
+}
+.services__item {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-md);
+}
+@media (max-width: 30rem) {
+  .swarm__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

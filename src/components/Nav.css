@@ -1,0 +1,87 @@
+.nav {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--z-nav);
+  background: color-mix(in oklab, var(--color-bg-page) 86%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-block-end: var(--line) solid var(--color-border);
+}
+.nav__inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+  min-block-size: 3.5rem;
+}
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text);
+  font-weight: 700;
+  text-decoration: none;
+  min-block-size: 2.75rem;
+}
+.nav__seat {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+.nav__links ul {
+  display: flex;
+  gap: var(--space-1);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-block: var(--space-1);
+  mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent);
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent);
+}
+.nav__links ul::-webkit-scrollbar {
+  display: none;
+}
+.nav__links a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.5rem;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition-property: color, background-color;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+@media (hover: hover) {
+  .nav__links a:hover {
+    color: var(--color-text);
+    background: var(--color-bg-raised);
+  }
+}
+.nav__signal {
+  justify-self: end;
+}
+
+@media (max-width: 52rem) {
+  .nav__inner {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'brand signal'
+      'links links';
+    row-gap: 0;
+  }
+  .nav__brand {
+    grid-area: brand;
+  }
+  .nav__signal {
+    grid-area: signal;
+  }
+  .nav__links {
+    grid-area: links;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+  }
+}

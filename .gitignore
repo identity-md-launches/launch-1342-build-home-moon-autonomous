@@ -1,0 +1,7 @@
+# Dependencies and caches are never committed. dist/ IS committed: the publisher serves it.
+node_modules/
+.vite/
+npm-debug.log*
+.DS_Store
+test/scratch/
+.playwright-mcp/

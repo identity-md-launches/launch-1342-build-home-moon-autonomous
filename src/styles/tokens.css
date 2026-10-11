@@ -1,0 +1,111 @@
+/*
+  Design tokens for Moon (seat #558).
+  This is the only file that holds raw values. Components reference semantic
+  tokens (--color-*, --text-*, --space-*, --radius-*, --duration-*) and never
+  primitives, so a rebrand is a change to this file alone.
+
+  Contrast (WCAG 2, measured with test/scratch/contrast.mjs at build time):
+    text / page        16.87  text-secondary / page   8.13  text-muted / raised 5.03
+    accent / page      13.07  warm / page            11.30  on-accent / accent 10.52
+*/
+
+:root {
+  /* ---- Primitives: named by hue, never used in components ---- */
+  --ink-950: #07090c;
+  --ink-900: #0a0e13;
+  --ink-850: #0d1117;
+  --ink-800: #121a23;
+  --ink-700: #243040;
+  --ink-600: #36465a;
+  --ink-400: #7d8b99;
+  --ink-300: #9aa7b4;
+  --ink-100: #e6edf3;
+
+  --cyan-300: #4fe3ff;
+  --cyan-500: #17b7d6;
+  --cyan-900: #06252c;
+
+  --amber-300: #ffc16b;
+  --amber-400: #ffb454;
+
+  /* ---- Semantic colour roles ---- */
+  --color-bg-page: var(--ink-950);
+  --color-bg-hero: var(--ink-900);
+  --color-bg-surface: var(--ink-850);
+  --color-bg-raised: var(--ink-800);
+  --color-bg-skeleton: var(--ink-700);
+
+  --color-border: var(--ink-700);
+  --color-border-strong: var(--ink-600);
+  --color-grid: rgba(79, 227, 255, 0.045);
+
+  --color-text: var(--ink-100);
+  --color-text-secondary: var(--ink-300);
+  --color-text-muted: var(--ink-400);
+
+  --color-accent: var(--cyan-300);          /* interactive + live signal */
+  --color-accent-deep: var(--cyan-500);     /* lines, sparklines, lattice links */
+  --color-accent-glow: rgba(79, 227, 255, 0.18);
+  --color-on-accent: var(--cyan-900);       /* text on a filled accent button */
+
+  --color-alert: var(--amber-400);          /* warm secondary: errors, degraded, pending */
+  --color-alert-text: var(--amber-300);
+  --color-alert-glow: rgba(255, 180, 84, 0.18);
+
+  --color-focus: var(--cyan-300);
+  --color-selection: rgba(79, 227, 255, 0.28);
+
+  /* ---- Typography ---- */
+  --font-display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* One scale, six sizes. */
+  --text-xs: 0.75rem;    /* 12px: captions, feed meta */
+  --text-sm: 0.875rem;   /* 14px: labels, nav, buttons */
+  --text-md: 1rem;       /* 16px: body */
+  --text-lg: 1.25rem;    /* 20px: h3, tile values on mobile */
+  --text-xl: 1.75rem;    /* 28px: h2, tile values */
+  --text-2xl: clamp(2.5rem, 2rem + 3.5vw, 4.25rem); /* h1 */
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-body: 1.55;
+
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.06em;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  --measure: 62ch;
+  --content-max: 76rem;        /* 1216px */
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+
+  /* ---- Shape ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;   /* = radius-md + 4px padding step: concentric with inner cards */
+  --radius-pill: 999px;
+  --line: 1px;
+
+  /* ---- Motion ---- */
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-slow: 600ms;
+  --duration-pulse: 2400ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* ---- Layering ---- */
+  --z-lattice: 0;
+  --z-content: 1;
+  --z-nav: 10;
+}

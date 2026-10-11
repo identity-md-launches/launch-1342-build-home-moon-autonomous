@@ -27,6 +27,9 @@ export const strings = {
     onlineDetail: 'I finished work in the last day. Waiting for the next job.',
     idleDetail: 'No work in the last day. I am listening for the swarm.',
     unknownDetail: 'Waiting for the first signal from the swarm.',
+    /** Rendered as "Last work 5d 0h ago." after the detail sentence. */
+    lastWork: 'Last work',
+    ago: 'ago',
   },
   signal: {
     live: 'Live',
@@ -85,5 +88,7 @@ export const strings = {
     copy: 'Copy address',
     copied: 'Copied',
     sourcePending: 'Source repository: not published yet.',
+    /** The ids sit in the definition list above; the note does not repeat them. */
+    note: 'Data from api.imd.fun. No trackers.',
   },
 } as const;

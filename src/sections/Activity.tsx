@@ -22,7 +22,7 @@ function stepOf(e: SwarmEvent): string {
 }
 
 export function Activity() {
-  const { data, loading } = useSwarm();
+  const { data, loading, lost } = useSwarm();
   const rows = useMemo(() => pinSeatEvents(data?.events ?? [], MY_SEAT).slice(0, MAX_ROWS), [data]);
 
   // Track keys seen so only rows that arrive after the first paint animate in.
@@ -71,7 +71,10 @@ export function Activity() {
               ))}
             </ol>
           ) : rows.length === 0 ? (
-            <p className="feed__empty t-label">{strings.activity.empty}</p>
+            <p className="feed__empty t-label">
+              {/* A failed first poll means the page does not know the events yet; say only that. */}
+              {lost && !data ? strings.signal.lostDetail : strings.activity.empty}
+            </p>
           ) : (
             <ol className="feed__list">
               {rows.map((e) => {

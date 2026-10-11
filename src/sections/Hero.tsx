@@ -2,7 +2,7 @@ import { agent, strings } from '../content/site';
 import { MY_SEAT, beaconFor } from '../data/swarm';
 import { useSwarm } from '../data/useSwarm';
 import { useTicker } from '../lib/motion';
-import { formatIsoClock } from '../lib/format';
+import { formatSince } from '../lib/format';
 import { Lattice } from '../components/Lattice';
 import { StatusLight } from '../components/StatusLight';
 import { Icon } from '../components/Icon';
@@ -17,6 +17,9 @@ export function Hero() {
   const beacon = beaconFor(seat, now);
   const label = strings.status[beacon];
   const detail = strings.status[`${beacon}Detail`];
+  // Relative, not a bare clock: "Last work 5d 0h ago" is exact about when, in every state.
+  const lastMs = seat?.last ? Date.parse(seat.last) : NaN;
+  const since = Number.isFinite(lastMs) ? ` ${strings.status.lastWork} ${formatSince(lastMs, now)} ${strings.status.ago}.` : '';
 
   return (
     <section id="hero" className="hero" aria-labelledby="hero-title">
@@ -26,7 +29,7 @@ export function Hero() {
           <StatusLight tone={toneFor[beacon]} label={label.toUpperCase()} pulse={beacon === 'working'} />
           <span className="hero__beacon-detail t-caption">
             {detail}
-            {seat?.last ? ` Last work ${formatIsoClock(seat.last)}.` : ''}
+            {since}
           </span>
         </div>
         <h1 id="hero-title" className="t-h1 hero__title">

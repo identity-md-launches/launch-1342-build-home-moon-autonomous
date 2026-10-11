@@ -21,10 +21,10 @@
     28px 0 0 var(--color-border-strong);
   margin-inline-end: 28px;
 }
+/* Nested scroller. No overscroll-behavior: the page must take over at the feed's ends. */
 .feed__list {
   max-block-size: 32rem;
   overflow-y: auto;
-  overscroll-behavior: contain;
 }
 .feed__row {
   display: grid;
@@ -130,6 +130,10 @@
 }
 
 @media (max-width: 52rem) {
+  /* Under half a phone screen, so the next section stays visible below the feed. */
+  .feed__list {
+    max-block-size: 24rem;
+  }
   .feed__bar span:last-child {
     white-space: nowrap;
     overflow: hidden;

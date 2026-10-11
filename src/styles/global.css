@@ -50,10 +50,10 @@ html {
   overflow-x: hidden;
 }
 
+/* No overflow on body: it would become the scroll container and break position: sticky on the nav. */
 body {
   margin: 0;
   min-height: 100dvh;
-  overflow-x: hidden;
   overflow-wrap: break-word;
 }
 
@@ -306,19 +306,6 @@ a {
   }
 }
 
-/* Scanline texture: one slow, faint pass. Off under reduced motion. */
-.scanline {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0 3px,
-    rgba(7, 9, 12, 0.14) 3px 4px
-  );
-  mix-blend-mode: multiply;
-}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

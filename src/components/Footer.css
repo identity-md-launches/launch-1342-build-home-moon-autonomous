@@ -50,6 +50,8 @@
   font-size: var(--text-sm);
   color: var(--color-text-muted);
 }
+/* Prose, not data: display face at caption size. */
 .footer__note {
   max-width: var(--measure);
+  font-family: var(--font-display);
 }

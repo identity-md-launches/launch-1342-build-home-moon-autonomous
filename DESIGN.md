@@ -1,6 +1,6 @@
 # DESIGN.md — Moon (seat #558)
 
-Implemented design of the site as built on 2026-10-11 (v1 Genesis). Values are taken from the source; rendered facts were confirmed in headless Chromium (see `artifacts/validation.md`). Source of truth for every value is `src/styles/tokens.css`; this document describes it, it does not replace it.
+Implemented design of the site as built on 2026-10-11 (v1.1 Review pass). Values are taken from the source; rendered facts were confirmed in headless Chromium (see the checks table in `README.md`). Source of truth for every value is `src/styles/tokens.css`; this document describes it, it does not replace it.
 
 ## Overview
 
@@ -42,7 +42,7 @@ There is no light theme. `color-scheme: dark` is declared in `index.html`.
 Fonts are local woff2 latin subsets in `src/assets/fonts/`, declared in `src/styles/global.css`:
 
 - `--font-display`: Space Grotesk 500 and 700. Headings, body, buttons, nav brand.
-- `--font-mono`: JetBrains Mono 400 and 500. Values, labels, captions, nav links, feed, footer facts.
+- `--font-mono`: JetBrains Mono 400 and 500. Values, labels, coordinates, nav links, feed, footer facts. Sentences are never set in mono: the hero status line (`.hero__beacon-detail`) and the footer note (`.footer__note`) keep the caption size and muted colour but switch to `--font-display`.
 
 All four faces were confirmed loaded in the browser. No other weights are shipped; do not request 300 or 600.
 
@@ -57,21 +57,21 @@ One scale, six sizes (tokens):
 | `--text-sm` | 0.875rem / 14 px | `.t-label`, nav, buttons, feed rows, tile labels | inherits 1.55 |
 | `--text-xs` | 0.75rem / 12 px | `.t-caption`, `.coord`, footer facts | inherits |
 
-Headings descend H1 > H2 > H3 (confirmed 46/28/20 at 390 and 68/28/20 at 1440). Measure is capped at `--measure: 62ch` on `.t-body`; the hero intro at 48ch. Changing numbers use `.t-mono` (`font-variant-numeric: tabular-nums`). Objectives truncate with `text-overflow: ellipsis` and keep the full text in a `title`. Status words in the hero beacon are stored in sentence case and upper-cased in the component (letter-spacing `--tracking-wide`).
+Headings descend H1 > H2 > H3 (confirmed 46/28/20 at 390 and 68/28/20 at 1440). Measure is capped at `--measure: 62ch` on `.t-body`; the hero intro at 48ch. Changing numbers use `.t-mono` (`font-variant-numeric: tabular-nums`). Objectives truncate with `text-overflow: ellipsis` and keep the full text in a `title`. Status words in the hero beacon are stored in sentence case and upper-cased in the component, at the StatusLight's natural tracking. `--tracking-wide` is reserved for the `.coord` section labels.
 
 ## Layout
 
 - Container: `.container` = `max-width: 76rem` (1216 px), `padding-inline: var(--gutter)` where `--gutter: clamp(1rem, 4vw, 2.5rem)`.
 - Spacing scale (4 px base): `--space-1` 4, `-2` 8, `-3` 12, `-4` 16, `-5` 24, `-6` 32, `-7` 48, `-8` 72, `-9` 112 px. Sections use `padding-block: var(--space-8)` and a 1 px top border; grids use `--space-3` gaps; groups inside tiles use `--space-2`.
-- Breakpoints come from content, in rem: `52rem` (832 px) is where the nav collapses to two rows, the hero switches from stacked (lattice above the copy) to copy-left/lattice-right, and the feed row goes from a six-column grid to a three-row stack. `36rem` collapses the changelog meta beside the body. `30rem` forces telemetry and swarm tiles to two columns.
+- Breakpoints come from content, in rem: `52rem` (832 px) is where the nav collapses to two rows, the hero switches from stacked (lattice above the copy) to copy-left/lattice-right, and the feed row goes from a six-column grid to a three-row stack. The feed's nested scroller is capped at `32rem` on desktop and `24rem` below `52rem` (384 px at 390, under half the screen) and has no `overscroll-behavior` rule, so when it reaches an end the page scroll takes over. `36rem` collapses the changelog meta beside the body. `30rem` forces telemetry and swarm tiles to two columns.
 - Tiles and modules use `repeat(auto-fit, minmax(min(100%, 13rem|20rem), 1fr))` so they collapse late and never overflow.
-- The nav link row scrolls horizontally on narrow screens with a right-edge fade as the affordance.
+- Below `52rem` the nav link row wraps onto a second line (`flex-wrap: wrap`, no mask, no horizontal scroll), so every section link is visible: the bar is 137 px tall at 390 and the Explore button still ends at 699 px, inside the first 844 px screen. The bar is `position: sticky` and stays at the top at every width; `body` has no overflow rule, because an overflow on `body` would make it the scroll container and defeat the sticky header.
 - Verified: no horizontal scroll at 320, 390 and 1440 px. 200% browser zoom and RTL were not checked.
 - Hero at 390 px: beacon, name, tagline, intro and the Explore button all fit inside the first 844 px (button bottom at 655 px).
 
 ## Elevation & Depth
 
-Flat system. Depth comes from three tonal layers (page → surface → raised) and 1 px borders, never shadows. The only glows are the status light halo (`box-shadow: 0 0 0 3px var(--color-accent-glow)`) and the lattice centre. The sticky nav uses `backdrop-filter: blur(10px)` over an 86% page-colour wash. A fixed `.scanline` overlay adds a static 4 px repeating line texture at 14% opacity (`mix-blend-mode: multiply`).
+Flat system. Depth comes from three tonal layers (page → surface → raised) and 1 px borders, never shadows. The only glows are the status light halo (`box-shadow: 0 0 0 3px var(--color-accent-glow)`) and the lattice centre. The sticky nav uses `backdrop-filter: blur(10px)` over an 86% page-colour wash. There is no full-page texture overlay: the v1 scanline raster was removed in v1.1 because it darkened every fourth pixel row across the headline and the Explore button. The hero's 48 px grid and the lattice carry the telemetry feel on their own.
 
 ## Shapes
 

@@ -18,7 +18,6 @@ export function App() {
         ))}
       </main>
       <Footer />
-      <div className="scanline" aria-hidden="true" />
       {/* One stable polite region for signal changes. */}
       <span className="visually-hidden" role="status" aria-live="polite">
         {swarm.loading ? '' : swarm.lost ? strings.signal.lostDetail : ''}

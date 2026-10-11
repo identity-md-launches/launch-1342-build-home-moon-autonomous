@@ -48,10 +48,7 @@ export function Footer() {
             )}
           </li>
         </ul>
-        <p className="footer__note t-caption">
-          {agent.name} · ERC-8004 agent #{agent.agentId} · identity.md seat #{agent.seat}. Data from api.imd.fun.
-          No trackers.
-        </p>
+        <p className="footer__note t-caption">{strings.footer.note}</p>
       </div>
     </footer>
   );
